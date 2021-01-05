@@ -1,47 +1,29 @@
-import Animated, {
-  useSharedValue,
-  withTiming,
-  useAnimatedStyle,
-  Easing,
-} from "react-native-reanimated";
-import { View, Button } from "react-native";
-import React from "react";
+import React, { useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import AppLoading from 'expo-app-loading'
 
-export default function AnimatedStyleUpdateExample(props) {
-  const randomWidth = useSharedValue(10);
+import { EMONScreen, HomeScreen } from './app/screens'
+import { initLoadFonts } from './app/styles'
 
-  const config = {
-    duration: 500,
-    easing: Easing.bezier(0.5, 0.01, 0, 1),
-  };
+const Stack = createStackNavigator()
 
-  const style = useAnimatedStyle(() => {
-    return {
-      width: withTiming(randomWidth.value, config),
-    };
-  });
+export default function App() {
+  const [loaded, setLoaded] = useState(false)
+
+  if(!loaded) return (
+    <AppLoading
+      startAsync={initLoadFonts}
+      onFinish={() => setLoaded(true)}
+      onError={() => {}} />
+  )
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Animated.View
-        style={[
-          { width: 100, height: 80, backgroundColor: "black", margin: 30 },
-          style,
-        ]}
-      />
-      <Button
-        title="toggle"
-        onPress={() => {
-          randomWidth.value = Math.random() * 350;
-        }}
-      />
-    </View>
-  );
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home" headerMode="none">
+          <Stack.Screen name="HOME_SCREEN" component={HomeScreen} />
+          <Stack.Screen name="EMON_SCREEN" component={EMONScreen} />
+        </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
