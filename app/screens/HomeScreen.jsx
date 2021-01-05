@@ -21,9 +21,9 @@ export default function HomeScreen() {
                 <Text style={styles.title}>CalisTimer</Text>
             </View>
             <View style={styles.buttons}>
-                <TextButton title="EMOM" style={styles.bt} action={goEMON}/>
-                <TextButton title="AMRAP" style={styles.bt} action={goAMRAP}/>
-                <TextButton title="Isometria" style={styles.bt} action={goIsometria}/>
+                <TextButton title="EMOM" style={styles.bt} onPress={goEMON}/>
+                <TextButton title="AMRAP" style={styles.bt} onPress={goAMRAP}/>
+                <TextButton title="Isometria" style={styles.bt} onPress={goIsometria}/>
             </View>
         </View>
     )
