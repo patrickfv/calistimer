@@ -4,12 +4,14 @@ import { useNavigation } from '@react-navigation/native'
 
 import { colors, fonts } from '../styles'
 import { TextButton } from '../components'
+import { EMOM_SCREEN_NAME } from './EMONScreen'
 
+export const HOME_SCREEN_NAME = 'HOME_SCREEN'
 const { width } = Dimensions.get('window')
 
 export default function HomeScreen() {
     const navigation = useNavigation()
-    const goEMON = () => navigation.navigate('EMON_SCREEN')
+    const goEMON = () => navigation.navigate(EMOM_SCREEN_NAME)
     const goAMRAP = () => {}
     const goIsometria = () => {}
 
