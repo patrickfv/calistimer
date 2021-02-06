@@ -1,15 +1,15 @@
 import * as Font from 'expo-font'
-import { Inter_700Bold, Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
+import { Inter_700Bold, Inter_400Regular } from '@expo-google-fonts/inter'
 
 export function initLoadFonts() {
     return Font.loadAsync({
         Inter_700Bold,
         Inter_400Regular,
-        Inter_500Medium,
     })
 }
 
 export default {
     TITLE: 'Inter_700Bold',
-    TEXT_DEFAULT: 'Inter_500Medium'
+    TEXT_DEFAULT: 'Inter_400Regular',
+    COUNT: 'Inter_400Regular',    
 }

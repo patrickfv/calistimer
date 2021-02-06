@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: width / 6,
-        color: colors.TEXT,
+        color: colors.TEXT_LIGHT,
         fontFamily: fonts.TITLE,
     },
     buttons: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     bt: {
         fontSize: 24,
-        color: colors.TEXT,
+        color: colors.TEXT_LIGHT,
         margin: 10,
         fontFamily: fonts.TEXT_DEFAULT
     },
