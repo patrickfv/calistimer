@@ -1,19 +1,18 @@
 import React, { useState, } from 'react'
 import { View, StyleSheet, TouchableOpacity, } from 'react-native'
-import Svg, { Path, G, Circle, } from 'react-native-svg'
+import Svg, { Path, Circle, } from 'react-native-svg'
 import { useSharedValue, useAnimatedStyle, } from 'react-native-reanimated'
 import Animated from 'react-native-reanimated'
 
 function Icon() {
-    const offset = useSharedValue(0)
+    const offsetY = useSharedValue(0)
     const animatedStyle = useAnimatedStyle(() => {
         return {
-            transform: [{ rotateY: `${offset.value}deg` }]
+            transform: [{ rotateY: `${offsetY.value}deg` }]
         }
     })
-
     const onTouchStart = () => {
-
+        offsetY.value = Math.random() * 255
     }
 
     return (
@@ -45,7 +44,6 @@ export default function PlayButton({ size=100, onClick=()=>{}, }) {
         <TouchableOpacity {...{ onPress }}>
             <View  style={[
                 styles.container,
-                style.size,
             ]}>
                 <Icon />
             </View>
