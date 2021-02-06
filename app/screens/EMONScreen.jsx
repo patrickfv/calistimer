@@ -1,26 +1,52 @@
-import React from 'react'
+import React, { useReducer, } from 'react'
 import { StyleSheet, 
     View, 
     Text,
     TextInput,
-    Dimensions, } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+    Dimensions,
+    ScrollView,
+    KeyboardAvoidingView, } from 'react-native'
 
 import { colors, fonts, } from '../styles'
-import { RadioGroup, PlayButton } from '../components'
+import { RadioGroup, PlayButton, } from '../components'
 
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
 
-const { width } = Dimensions.get('window')
+const { width, height, } = Dimensions.get('window')
+
+const initialState = {
+    alert: 0,
+    countdown: 0,
+    playing: false,
+}
 
 export default function EMONScreen() {
+    const [state, dispatch] = useReducer((state, { field, value, }) => {
+        return {
+            ...state,
+            [field]: value,
+        }
+    }, initialState)
+
     const optionsAlert = ['DESLIGADO', '15s', '30s', '45s']
     const optionsCountdown = ['SIM', 'NÃO']
-    const onChangeAlert = selected => {}
+    const onChangeAlert = selected => {
+        dispatch({ 
+            field: 'alert',
+            value: selected.id,
+        })
+    }
     const onChangeCountdown = selected => {}
- 
+    const onClick = () => {
+        dispatch({
+            field: 'playing',
+            value: !state.playing,
+        })
+    }
+
     return (
-        <KeyboardAwareScrollView style={styles.container}>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', height }}>
                 <View style={styles.header}>
                     <Text style={styles.title}>EMOM</Text>
                     <Text style={styles.text}>Every Minute On the Minute</Text>
@@ -28,27 +54,29 @@ export default function EMONScreen() {
                 <View style={styles.content}>
                     <View style={styles.panel}>
                         <Text style={[styles.text, { fontSize: 18 }]}>ALERTAS</Text>
-                        <RadioGroup items={optionsAlert} onChange={onChangeAlert} />
+                        <RadioGroup items={optionsAlert} onChange={onChangeAlert} selectedDefault={initialState.alert} />
                     </View>
                     <View style={styles.panel}>
                         <Text style={styles.text}>CONTAGEM REGRESSIVA</Text>
-                        <RadioGroup items={optionsCountdown} onChange={onChangeCountdown} />
+                        <RadioGroup items={optionsCountdown} onChange={onChangeCountdown} selectedDefault={initialState.countdown} />
                     </View>
                     <View style={[
-                            styles.panel,
-                            { flex: 1 },
-                        ]}>
+                        styles.panel,
+                        { flex: 1 },
+                    ]}>
                         <Text style={styles.text}>QUANTOS MINUTOS</Text>
                         <TextInput style={styles.count} value="15" keyboardType="number-pad" />
                         <Text style={styles.text}>MINUTOS</Text>
                     </View>
                     <View style={styles.panel}>
                         <View>
-                            <PlayButton size={100} />
+                            <PlayButton size={100} {...{ onClick }} />
                         </View>
                     </View>
                 </View>
-        </KeyboardAwareScrollView>
+                <KeyboardAvoidingView behavior="position" />
+            </ScrollView>
+        </View>
     )
 }
 
