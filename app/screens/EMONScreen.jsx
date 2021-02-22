@@ -1,4 +1,4 @@
-import React, { useReducer, } from 'react'
+import React, { useReducer, useState, } from 'react'
 import { StyleSheet, 
     View, 
     Text,
@@ -11,7 +11,6 @@ import { colors, fonts, } from '../styles'
 import { RadioGroup, PlayButton, } from '../components'
 
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
-
 const { width, height, } = Dimensions.get('window')
 
 const initialState = {
@@ -21,6 +20,7 @@ const initialState = {
 }
 
 export default function EMONScreen() {
+    const [minutes, setMinutes] = useState('0')
     const [state, dispatch] = useReducer((state, { field, value, }) => {
         return {
             ...state,
@@ -37,6 +37,14 @@ export default function EMONScreen() {
         })
     }
     const onChangeCountdown = selected => {}
+    const onChangeText = text => {
+        const converted = parseInt(text)
+        if(!converted) {
+            setMinutes('0')
+            return
+        }
+        setMinutes(converted.toString())
+    }
     const onClick = () => {
         dispatch({
             field: 'playing',
@@ -65,7 +73,7 @@ export default function EMONScreen() {
                         { flex: 1 },
                     ]}>
                         <Text style={styles.text}>QUANTOS MINUTOS</Text>
-                        <TextInput style={styles.count} value="15" keyboardType="number-pad" />
+                        <TextInput style={styles.count} keyboardType="number-pad" textContentType="telephoneNumber" {...{ value: minutes, onChangeText, }} />
                         <Text style={styles.text}>MINUTOS</Text>
                     </View>
                     <View style={styles.panel}>
