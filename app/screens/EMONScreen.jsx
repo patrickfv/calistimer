@@ -38,12 +38,10 @@ export default function EMONScreen() {
     }
     const onChangeCountdown = selected => {}
     const onChangeText = text => {
-        const converted = parseInt(text)
-        if(!converted) {
-            setMinutes('0')
-            return
+        if(!text) {
+            text = '0'
         }
-        setMinutes(converted.toString())
+        setMinutes(parseInt(text).toString())
     }
     const onClick = () => {
         dispatch({
