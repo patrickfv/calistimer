@@ -18,14 +18,19 @@ export default function PlayButton({ size=100, onClick=()=>{}, }) {
         setPlay(play => (play === 0 ? 1 : 0))
         onClick()
     }
-    const Side = ({ title, color='transparent', }) => {
+    const Side = ({ title, bgColor='transparent', color='white' }) => {
 
         return (
             <View style={[
                 styleCircle,
-                { backgroundColor: color, width: '100%', height: '100%', },
+                { backgroundColor: bgColor, width: '100%', height: '100%', },
             ]}>
-                <Text style={styles.text}>{ title }</Text>
+                <Text style={[
+                    styles.text, 
+                    { color: color }
+                ]}>
+                    { title }
+                </Text>
             </View>
         )
     }
@@ -36,8 +41,8 @@ export default function PlayButton({ size=100, onClick=()=>{}, }) {
                 <FlipCard 
                     side={play}
                     style={styleCircle}
-                    front={<Side title="Play" color="blue" />}
-                    back={<Side title="Pause" color="blue" />}
+                    front={<Side title="Play" color="black" bgColor="white" />}
+                    back={<Side title="Pause" color="black" bgColor="white" />}
                 />
             </View>
         </TouchableWithoutFeedback>
