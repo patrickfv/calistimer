@@ -56,7 +56,7 @@ function runTiming(clock, value, dest) {
     ])
 }
 
-export default function ReanimatedFlip({
+export default function AnimatedFlip({
     perspective = 1200,
     rotate = 'Y',
     side,

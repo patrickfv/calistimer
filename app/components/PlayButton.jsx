@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from 'react'
 import { View, StyleSheet, TouchableWithoutFeedback, Text } from 'react-native'
-import FlipCard from './FlipCard'
+import AnimatedFlip from './AnimatedFlip'
 
 export default function PlayButton({ size=100, onClick=()=>{}, }) {
     const [play, setPlay] = useState(0)
@@ -38,7 +38,7 @@ export default function PlayButton({ size=100, onClick=()=>{}, }) {
     return (
         <TouchableWithoutFeedback {...{ onPress }}>
             <View  style={styles.container}>
-                <FlipCard 
+                <AnimatedFlip 
                     side={play}
                     style={styleCircle}
                     front={<Side title="Play" color="black" bgColor="white" />}
