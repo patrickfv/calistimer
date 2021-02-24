@@ -7,8 +7,8 @@ import { StyleSheet,
     ScrollView,
     KeyboardAvoidingView, } from 'react-native'
 
-import { colors, fonts, } from '../styles'
-import { RadioGroup, PlayButton, } from '../components'
+import { colors, fonts, } from '../../styles'
+import { RadioGroup, PlayButton, } from '../../components'
 
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
 const { width, height, } = Dimensions.get('window')
@@ -18,6 +18,7 @@ const initialState = {
     countdown: 0,
     playing: false,
 }
+
 
 export default function EMONScreen() {
     const [minutes, setMinutes] = useState('0')
@@ -120,5 +121,5 @@ const styles = StyleSheet.create({
         color: colors.TEXT_DARK,
         fontFamily: fonts.COUNT_FONT,
         fontSize: 50,
-    }
+    },
 })
