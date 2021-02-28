@@ -9,6 +9,7 @@ import { StyleSheet,
 
 import { colors, fonts, } from '../../styles'
 import { RadioGroup, PlayButton, } from '../../components'
+import Running from './Running'
 
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
 const { width, height, } = Dimensions.get('window')
@@ -17,8 +18,8 @@ const initialState = {
     alert: 0,
     countdown: 0,
     playing: false,
+    time: 0,
 }
-
 
 export default function EMONScreen() {
     const [minutes, setMinutes] = useState('0')
@@ -38,20 +39,23 @@ export default function EMONScreen() {
         })
     }
     const onChangeCountdown = selected => {}
-    const onChangeText = text => {
-        if(!text) text = '1'
-        setMinutes((parseInt(text) || parseInt(1)).toString())
-    }
     const onClick = () => {
         dispatch({
             field: 'playing',
             value: !state.playing,
         })
     }
+    const onChangeText = text => setMinutes(text)
+    const onBlur = () => {
+        if(!minutes) minutes = '1'
+        setMinutes((parseInt(minutes) || parseInt(1)).toString())
+    }
+
+    if(state.playing) return <Running />
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', height }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', height, }}>
                 <View style={styles.header}>
                     <Text style={styles.title}>EMOM</Text>
                     <Text style={styles.text}>Every Minute On the Minute</Text>
@@ -67,15 +71,15 @@ export default function EMONScreen() {
                     </View>
                     <View style={[
                         styles.panel,
-                        { flex: 1 },
+                        { flex: 1, },
                     ]}>
                         <Text style={styles.text}>QUANTOS MINUTOS</Text>
-                        <TextInput style={styles.count} keyboardType="number-pad" textContentType="telephoneNumber" {...{ value: minutes, onChangeText, }} />
+                        <TextInput style={styles.count} keyboardType="number-pad" textContentType="telephoneNumber" onFocus={({ target }) => {}} value={minutes} {...{ onChangeText, onBlur, }} />
                         <Text style={styles.text}>MINUTOS</Text>
                     </View>
                     <View style={styles.panel}>
                         <View>
-                            <PlayButton size={100} {...{ onClick }} />
+                            <PlayButton size={100} {...{ onClick, }} />
                         </View>
                     </View>
                 </View>
