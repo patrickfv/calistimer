@@ -1,9 +1,14 @@
 import React from 'react'
-import { View, StyleSheet, } from 'react-native'
+import { View, Text, StyleSheet, } from 'react-native'
 
-export default function Time() {
+export default function Time({ time, }) {
+    const minutes = parseFloat(time / 60)
+    const seconds = time % 60
+
     return (
-        <View style={styles.container} />
+        <View style={styles.container}>
+            <Text>{ minutes }:{ seconds }</Text>
+        </View>
     )
 }
 
