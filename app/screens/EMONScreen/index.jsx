@@ -49,6 +49,10 @@ export default function EMONScreen() {
     const onBlur = () => {
         if(!minutes) minutes = '1'
         setMinutes((parseInt(minutes) || parseInt(1)).toString())
+        dispatch({
+            field: 'time',
+            value: parseInt(minutes) * 60,
+        })
     }
 
     if(state.playing) return <Running />
