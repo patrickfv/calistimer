@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, } from 'react-native'
 
 export default function ProgressBackground({ children, percentage, }) {
-    
+
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, }}>
@@ -22,9 +22,11 @@ const styles = StyleSheet.create({
     },
     children: {
         position: 'absolute',
-        bottom: -50,
-        right: 50,
+        bottom: '30%',
+        left: 0,
+        width: "100%",
         height: 100,
-        width: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 })
