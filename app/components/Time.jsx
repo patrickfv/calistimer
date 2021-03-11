@@ -1,13 +1,29 @@
 import React from 'react'
 import { View, Text, StyleSheet, } from 'react-native'
 
-export default function Time({ time, }) {
-    const minutes = parseFloat(time / 60)
-    const seconds = time % 60
+function format(time) {
+    var minutes = parseInt(time / 60)
+    var seconds = time % 60 // time - minutes * 60
+    const strPadLeft = (str, pad, length) => (new Array(length+1).join(pad)+str).slice(-length)
+
+    minutes = strPadLeft(minutes, '0', 2)
+    seconds = strPadLeft(seconds, '0', 2)
+
+    return {
+        minutes,
+        seconds,
+    }
+}
+
+export default function Time({ time, color='white', size=12, }) {
+    const { minutes, seconds, } = format(time)
 
     return (
         <View style={styles.container}>
-            <Text>{ minutes }:{ seconds }</Text>
+            <Text style={{
+                color,
+                fontSize: size,
+            }}>{ minutes }:{ seconds }</Text>
         </View>
     )
 }
