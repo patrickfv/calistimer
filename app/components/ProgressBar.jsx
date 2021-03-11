@@ -1,14 +1,19 @@
 import React from 'react'
-import { View, StyleSheet, } from 'react-native'
+import { View, StyleSheet, Dimensions, } from 'react-native'
 
-export default function ProgressBar() {
+export default function ProgressBar({ percentage, height=3, color='white', style, }) {
+    const width = Dimensions.get('window').width / 100 * percentage
+
     return (
-        <View style={styles.container} />
+        <View style={[
+            {
+                height,
+                width,
+                backgroundColor: color,
+            },
+            style
+        ]} />
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-})
+const styles = StyleSheet.create({})
