@@ -1,20 +1,66 @@
-import React from 'react'
-import { View, StyleSheet, } from 'react-native'
+import React, { useState, useEffect, } from 'react'
+import { View, StyleSheet, Text, Dimensions, } from 'react-native'
 
-import { ProgressBackground, Time } from '../../components'
+import { ProgressBackground, Time, ProgressBar, } from '../../components'
 
-export default function Running() {
+const { width, } = Dimensions.get('window')
+
+export default function Running({ countdown=true, time=60, }) {
+    const incrementOrDecrement = countdown ? 0 : time
+    const [count, setCount] = useState(incrementOrDecrement)
+    const [running, setRunning] = useState(true)
+
+    const increment = () => {
+        const interval = setInterval(() => {
+            if(count < time) {
+                setCount(parseInt(count + 1))
+            } else {
+                clearInterval(interval)
+            }
+        }, 1000)
+        return interval
+    }
+
+    const decrement = () => {
+        const interval = setInterval(() => {
+            if(count > 0) {
+                setCount(parseInt(count - 1))
+            } else {
+                clearInterval(interval)
+            }
+            console.log(parseInt(count / time * 100))
+        }, 1000)
+        return interval
+    }
+
+    useEffect(() => {
+        const interval = countdown ? increment() : decrement()
+        return () => clearInterval(interval)
+    }, [count])
+
+    // useEffect(() => {
+    //
+    // }, [running])
+    // (count % 60 / 60 * 100)
     return (
-        <View style={styles.container}>
-            <ProgressBackground percentage={60}>
-                <Time time={2400}/>
-            </ProgressBackground>
-        </View>
+        <ProgressBackground percentage={parseInt(count / time * 100)}>
+            <View style={styles.container}>
+                <Time time={time - count} size={20} />
+                <ProgressBar style={styles.left} percentage={parseInt(count % 60 / 60 * 100)}/>
+                <Time time={count} />
+                <Text style={{ color: 'white', }}>restantes</Text>
+            </View>
+        </ProgressBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width,
+        alignItems: 'center',
+    },
+    left: {
+        alignSelf: 'flex-start',
     },
 })
