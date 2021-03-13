@@ -30,15 +30,26 @@ export default function EMONScreen() {
         }
     }, initialState)
 
-    const optionsAlert = ['DESLIGADO', '15s', '30s', '45s']
-    const optionsCountdown = ['SIM', 'NÃO']
+    // const optionsAlert = ['DESLIGADO', '15s', '30s', '45s']
+    const optionsAlert = {
+        '0s': 0,
+        '15s': 15,
+        '30s': 30,
+        '45s': 45,
+    }
+    const optionsCountdown = ['NÃO', 'SIM']
     const onChangeAlert = selected => {
         dispatch({ 
             field: 'alert',
             value: selected.id,
         })
     }
-    const onChangeCountdown = selected => {}
+    const onChangeCountdown = selected => {
+        dispatch({
+            field: 'countdown',
+            value: selected.id,
+        })
+    }
     const onClick = () => {
         dispatch({
             field: 'playing',
@@ -55,7 +66,7 @@ export default function EMONScreen() {
         })
     }
 
-    if(state.playing) return <Running />
+    if(state.playing) return <Running countdown={state.countdown} alert={optionsAlert[Object.keys(optionsAlert)[state.alert]]}/>
 
     return (
         <View style={styles.container}>
@@ -67,7 +78,7 @@ export default function EMONScreen() {
                 <View style={styles.content}>
                     <View style={styles.panel}>
                         <Text style={[styles.text, { fontSize: 18 }]}>ALERTAS</Text>
-                        <RadioGroup items={optionsAlert} onChange={onChangeAlert} selectedDefault={initialState.alert} />
+                        <RadioGroup items={Object.keys(optionsAlert)} onChange={onChangeAlert} selectedDefault={initialState.alert} />
                     </View>
                     <View style={styles.panel}>
                         <Text style={styles.text}>CONTAGEM REGRESSIVA</Text>
