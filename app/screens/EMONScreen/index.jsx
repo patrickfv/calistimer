@@ -70,7 +70,7 @@ export default function EMONScreen() {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', height, }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', minHeight: height, }}>
                 <View style={styles.header}>
                     <Text style={styles.title}>EMOM</Text>
                     <Text style={styles.text}>Every Minute On the Minute</Text>
