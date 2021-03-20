@@ -11,20 +11,42 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     const [sound, setSound] = useState()
     const [count, setCount] = useState(incrementOrDecrement)
     const [running, setRunning] = useState(run)
-    // const [timeout, setTimeout] = useState(5)
+    const [countAlert, setCountAlert] = useState(alert)
+    const TIMEOUT = 5000
 
-    const playSound = async () => {
+    const playSound = async () => { 
         const { sound, } = await Audio.Sound.createAsync(require('../../assets/alert.wav'))
         await sound.playAsync()
     }
 
-    // const clearSound = async () => await sound.unloadAsync()
+    const playAlert = () => {
+        // const interval = setInterval(() => {
+        //     if(alert) {
+        //         setState({ field: 'alert', value: alert - 1 })
+        //         if(state.alert === 0) playSound()
+        //         console.log(state.alert)
+        //     } else {
+        //         clearInterval(interval)
+        //     }
+        // }, alert * 1000)
+        // return interval
+        
+        if(!alert) return
+        setCountAlert(parseInt(countAlert - 1))
+        if(countAlert === 0) {
+            console.log(countAlert)
+            setCountAlert(alert)
+        }
+    }
     
     const increment = () => {
         const interval = setInterval(() => {
             if(running) {
                 if(count < time) {
                     setCount(parseInt(count + 1))
+                    // setState({ field: 'alert', value: state.alert - 1 })
+                    // console.log(state.alert)
+                    playAlert()
                 } else {
                     clearInterval(interval)
                 }
@@ -51,16 +73,29 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     }
 
     useEffect(() => {
-        var interval = countdown ? increment() : decrement()
-        return () => clearInterval(interval)
+        const interval = countdown ? increment() : decrement()
+        // const alertInterval = playAlert()
+        return () => {
+            clearInterval(interval)
+            // clearInterval(alertInterval)
+        }
     }, [running, count])
+    
+    // useEffect(() => {
+        // if(alert) {
+        //     setState({ field: 'alert', value: alert - 1 })
+        //     if(state.alert === 1) playSound()
+        //     console.log(state.alert)
+        // }
+        // const alertInterval = playAlert()
+        // return () => clearInterval(alertInterval)
+    // }, [running, state.alert])
 
     useEffect(() => {
         const timeout = setInterval(() => {
             setRunning(true)
-            console.log(running)
             return clearTimeout(timeout)
-        }, 5000)
+        }, TIMEOUT)
         return () => clearTimeout(timeout)
     }, [])
     
