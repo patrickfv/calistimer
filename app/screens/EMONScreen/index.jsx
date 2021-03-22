@@ -66,7 +66,7 @@ export default function EMONScreen() {
         })
     }
 
-    if(state.playing) return <Running countdown={state.countdown} alert={optionsAlert[Object.keys(optionsAlert)[state.alert]]}/>
+    if(state.playing) return <Running countdown={state.countdown} alert={optionsAlert[Object.keys(optionsAlert)[state.alert]]} time={state.time}/>
 
     return (
         <View style={styles.container}>
