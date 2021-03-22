@@ -18,11 +18,11 @@ const initialState = {
     alert: 0,
     countdown: 0,
     playing: false,
-    time: 0,
+    time: 60,
 }
 
 export default function EMONScreen() {
-    const [minutes, setMinutes] = useState('0')
+    const [minutes, setMinutes] = useState('1')
     const [state, dispatch] = useReducer((state, { field, value, }) => {
         return {
             ...state,
@@ -58,7 +58,7 @@ export default function EMONScreen() {
     }
     const onChangeText = text => setMinutes(text)
     const onBlur = () => {
-        if(!minutes) minutes = '1'
+        if(!minutes) setMinutes('1')
         setMinutes((parseInt(minutes) || parseInt(1)).toString())
         dispatch({
             field: 'time',
