@@ -23,12 +23,7 @@ const initialState = {
 
 export default function EMONScreen() {
     const [minutes, setMinutes] = useState('1')
-    const [state, dispatch] = useReducer((state, { field, value, }) => {
-        return {
-            ...state,
-            [field]: value,
-        }
-    }, initialState)
+    const [state, setState] = useState(initialState)
 
     // const optionsAlert = ['DESLIGADO', '15s', '30s', '45s']
     const optionsAlert = {
@@ -39,30 +34,30 @@ export default function EMONScreen() {
     }
     const optionsCountdown = ['NÃO', 'SIM']
     const onChangeAlert = selected => {
-        dispatch({ 
-            field: 'alert',
-            value: selected.id,
+        setState({
+            ...state,
+            alert: selected.id,
         })
     }
     const onChangeCountdown = selected => {
-        dispatch({
-            field: 'countdown',
-            value: selected.id,
+        setState({
+            ...state,
+            countdown: selected.id,  
         })
     }
     const onClick = () => {
-        dispatch({
-            field: 'playing',
-            value: !state.playing,
+        setState({
+            ...state,
+            playing: !state.playing,  
         })
     }
     const onChangeText = text => setMinutes(text)
     const onBlur = () => {
         if(!minutes) setMinutes('1')
         setMinutes((parseInt(minutes) || parseInt(1)).toString())
-        dispatch({
-            field: 'time',
-            value: parseInt(minutes) * 60,
+        setState({
+            ...state,
+            time: parseInt(minutes) * 60,  
         })
     }
 
