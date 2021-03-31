@@ -3,97 +3,61 @@ import { View, StyleSheet, Text, Dimensions, } from 'react-native'
 import { Audio, } from 'expo-av'
 
 import { ProgressBackground, Time, ProgressBar, } from '../../components'
+import { useInterval, } from '../../hooks'
 
 const { width, } = Dimensions.get('window')
 
 export default function Running({ countdown=false, time=60, alert=0, run=false, }) {
-    const incrementOrDecrement = countdown ? 0 : time
     const [sound, setSound] = useState()
-    const [count, setCount] = useState(incrementOrDecrement)
+    const [count, setCount] = useState(countdown ? 0 : time)
     const [running, setRunning] = useState(run)
-    const [countAlert, setCountAlert] = useState(alert)
+    const [countAlert, setCountAlert] = useState(false)
     const TIMEOUT = 5000
 
     const playSound = async () => { 
         const { sound, } = await Audio.Sound.createAsync(require('../../assets/alert.wav'))
         await sound.playAsync()
+        setSound(sound)
     }
 
-    const playAlert = () => {
-        // const interval = setInterval(() => {
-        //     if(alert) {
-        //         setState({ field: 'alert', value: alert - 1 })
-        //         if(state.alert === 0) playSound()
-        //         console.log(state.alert)
-        //     } else {
-        //         clearInterval(interval)
-        //     }
-        // }, alert * 1000)
-        // return interval
-        
-        if(!alert) return
-        setCountAlert(parseInt(countAlert - 1))
-        if(countAlert === 0) {
-            console.log(countAlert)
-            setCountAlert(alert)
-        }
-    }
+    useEffect(() => {
+        return sound
+            ? () => sound.unloadAsync()
+            : undefined
+    }, [sound])
     
-    const increment = () => {
-        const interval = setInterval(() => {
+    const action = countdown
+        ? () => { 
             if(running) {
-                if(count < time) {
-                    setCount(parseInt(count + 1))
-                    // setState({ field: 'alert', value: state.alert - 1 })
-                    // console.log(state.alert)
-                    playAlert()
-                } else {
-                    clearInterval(interval)
+                if(count < time) { 
+                    setCount(count + 1)
                 }
             } else {
                 playSound()
             }
-        }, 1000)
-        return interval
-    }
-    
-    const decrement = () => {    
-        const interval = setInterval(() => {
+        }
+        : () => {
             if(running) {
-                if(count > 0) {
-                    setCount(parseInt(count - 1))
-                } else {
-                    clearInterval(interval)
-                }
+                if(count > 0) setCount(count - 1)
             } else {
                 playSound()
             }
-        }, 1000)
-        return interval
-    }
-
-    useEffect(() => {
-        const interval = countdown ? increment() : decrement()
-        // const alertInterval = playAlert()
-        return () => {
-            clearInterval(interval)
-            // clearInterval(alertInterval)
         }
-    }, [running, count])
-    
-    // useEffect(() => {
-        // if(alert) {
-        //     setState({ field: 'alert', value: alert - 1 })
-        //     if(state.alert === 1) playSound()
-        //     console.log(state.alert)
-        // }
-        // const alertInterval = playAlert()
-        // return () => clearInterval(alertInterval)
-    // }, [running, state.alert])
+
+    useInterval(() => {
+        action()
+    }, 1000)
 
     useEffect(() => {
-        const timeout = setInterval(() => {
+        countAlert && count % alert === 0
+            ? playSound()
+            : undefined
+    }, [count])
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
             setRunning(true)
+            setCountAlert(Boolean(alert))
             return clearTimeout(timeout)
         }, TIMEOUT)
         return () => clearTimeout(timeout)
