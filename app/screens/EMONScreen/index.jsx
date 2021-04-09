@@ -1,4 +1,4 @@
-import React, { useReducer, useState, } from 'react'
+import React, { useState, } from 'react'
 import { StyleSheet, 
     View, 
     Text,
@@ -14,7 +14,7 @@ import Running from './Running'
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
 const { width, height, } = Dimensions.get('window')
 
-const initialState = {
+const INITIAL_STATE = {
     alert: 0,
     countdown: 0,
     playing: false,
@@ -23,7 +23,7 @@ const initialState = {
 
 export default function EMONScreen() {
     const [minutes, setMinutes] = useState('1')
-    const [state, setState] = useState(initialState)
+    const [state, setState] = useState(INITIAL_STATE)
 
     // const optionsAlert = ['DESLIGADO', '15s', '30s', '45s']
     const optionsAlert = {
@@ -73,11 +73,11 @@ export default function EMONScreen() {
                 <View style={styles.content}>
                     <View style={styles.panel}>
                         <Text style={[styles.text, { fontSize: 18 }]}>ALERTAS</Text>
-                        <RadioGroup items={Object.keys(optionsAlert)} onChange={onChangeAlert} selectedDefault={initialState.alert} />
+                        <RadioGroup items={Object.keys(optionsAlert)} onChange={onChangeAlert} selectedDefault={INITIAL_STATE.alert} />
                     </View>
                     <View style={styles.panel}>
                         <Text style={styles.text}>CONTAGEM REGRESSIVA</Text>
-                        <RadioGroup items={optionsCountdown} onChange={onChangeCountdown} selectedDefault={initialState.countdown} />
+                        <RadioGroup items={optionsCountdown} onChange={onChangeCountdown} selectedDefault={INITIAL_STATE.countdown} />
                     </View>
                     <View style={[
                         styles.panel,

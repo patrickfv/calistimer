@@ -1,6 +1,5 @@
 import React, { useState, useEffect, } from 'react'
 import { View, StyleSheet, TouchableWithoutFeedback, Text, } from 'react-native'
-import AnimatedFlip from './AnimatedFlip'
 
 export default function PlayButton({ size=100, onClick=()=>{}, }) {
     const [play, setPlay] = useState(0)
@@ -11,6 +10,7 @@ export default function PlayButton({ size=100, onClick=()=>{}, }) {
         height: size,
         borderRadius: size / 2,
     }
+    
     useEffect(() => {
     }, [play])
 
