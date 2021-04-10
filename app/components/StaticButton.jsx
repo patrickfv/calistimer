@@ -18,7 +18,7 @@ function Stop() {
     )
 }
 
-export default function StaticButton({ size=50, onClick=()=>{}, type='play' }) {
+export default function StaticButton({ size=50, onClick=()=>{}, type='play', style }) {
 
     const onPress = () => {
         onClick()
@@ -27,12 +27,14 @@ export default function StaticButton({ size=50, onClick=()=>{}, type='play' }) {
     return (
         <TouchableWithoutFeedback 
             {...{ onPress }}
-            style={{
+            style={[{
                 justifyContent: 'center',
                 width: size,
                 height: size,
                 borderRadius: size / 2,
-            }}>
+            }, 
+            style
+            ]}>
             { type === 'play'
                 ? <Play />
                 : <Stop />
