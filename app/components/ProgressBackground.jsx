@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
     },
     children: {
         position: 'absolute',
-        bottom: '30%',
+        bottom: 0,
         left: 0,
-        width: "100%",
-        height: 100,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
