@@ -2,16 +2,17 @@ import React, { useState, useEffect, } from 'react'
 import { View, StyleSheet, Text, Dimensions, } from 'react-native'
 import { Audio, } from 'expo-av'
 
-import { ProgressBackground, Time, ProgressBar, } from '../../components'
+import { ProgressBackground, Time, ProgressBar, StaticButton, } from '../../components'
 import { useInterval, } from '../../hooks'
 
 const { width, } = Dimensions.get('window')
 
-export default function Running({ countdown=false, time=60, alert=0, run=false, }) {
+export default function Running({ countdown=false, time=60, alert=0, run=false, onClick=()=>{}, }) {
     const [sound, setSound] = useState()
     const [count, setCount] = useState(countdown ? 0 : time)
     const [running, setRunning] = useState(run)
     const [countAlert, setCountAlert] = useState(false)
+    const [countTimeout, setCountTimeout] = useState(5)
     const TIMEOUT = 5000
 
     const playSound = async () => { 
@@ -29,17 +30,21 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     const action = countdown
         ? () => { 
             if(running) {
+                if(countTimeout) setCountTimeout(countTimeout - 1)
                 if(count < time) { 
                     setCount(count + 1)
                 }
             } else {
                 playSound()
+                if(countTimeout) setCountTimeout(countTimeout - 1)
             }
         }
         : () => {
             if(running) {
+                if(countTimeout) setCountTimeout(countTimeout - 1)
                 if(count > 0) setCount(count - 1)
             } else {
+                if(countTimeout) setCountTimeout(countTimeout - 1)
                 playSound()
             }
         }
@@ -66,10 +71,22 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     return (
         <ProgressBackground percentage={parseInt(count / time * 100)}>
             <View style={styles.container}>
-                <Time time={time - count} size={20} />
-                <ProgressBar style={styles.left} percentage={parseInt(count % 60 / 60 * 100)}/>
-                <Time time={count} />
-                <Text style={{ color: 'white', }}>restantes</Text>
+                <View style={{ flexGrow: 1, justifyContent: 'center' }}>
+                    <Text style={{ textAlign: 'center', color: 'white', fontSize: 35, }}>EMOM</Text>
+                    <Text style={{ color: 'white', fontSize: 16, }}>Every Minute On the Minute</Text>
+                </View>
+                <View style={{ width, flexDirection: 'column', flexGrow: 1, }}>
+                    <Time time={time - count} size={60} />
+                    <ProgressBar style={{ alignSelf: 'flex-start', }} percentage={parseInt(count % 60 / 60 * 100)}/>
+                    <View style={styles.rest}>
+                        <Time time={count} />
+                        <Text style={{ color: 'white', textAlign: 'center', fontSize: 16, }}>restantes</Text>
+                    </View>
+                </View>
+                <View style={{ flexGrow: 1, justifyContent: 'space-evenly' }}>
+                    <Text style={{ fontSize: 70, color: 'white', textAlign: 'center', }}>{ countTimeout }</Text>
+                    <StaticButton {...{ onClick }} type="stop" style={{ alignSelf: 'flex-end', }} />
+                </View>
             </View>
         </ProgressBackground>
     )
@@ -78,10 +95,14 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width,
         alignItems: 'center',
+        justifyContent: 'space-between',
     },
-    left: {
-        alignSelf: 'flex-start',
+    rest: { 
+        flexDirection: 'row',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        width: width / 3,
+        alignSelf: 'center',
     },
 })
