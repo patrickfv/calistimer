@@ -8,7 +8,7 @@ import { StyleSheet,
     KeyboardAvoidingView, } from 'react-native'
 
 import { colors, fonts, } from '../../styles'
-import { RadioGroup, PlayButton, } from '../../components'
+import { RadioGroup, StaticButton, } from '../../components'
 import Running from './Running'
 
 export const EMOM_SCREEN_NAME = 'EMON_SCREEN'
@@ -89,7 +89,7 @@ export default function EMONScreen() {
                     </View>
                     <View style={styles.panel}>
                         <View>
-                            <PlayButton size={100} {...{ onClick, }} />
+                            <StaticButton size={60} {...{ onClick, }} />
                         </View>
                     </View>
                 </View>
