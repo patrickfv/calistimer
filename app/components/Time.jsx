@@ -15,7 +15,7 @@ function format(time) {
     }
 }
 
-export default function Time({ time, color='white', size=12, }) {
+export default function Time({ time, color='white', size=12, aling='center' }) {
     const { minutes, seconds, } = format(time)
 
     return (
@@ -23,6 +23,7 @@ export default function Time({ time, color='white', size=12, }) {
             <Text style={{
                 color,
                 fontSize: size,
+                textAlign: aling
             }}>{ minutes }:{ seconds }</Text>
         </View>
     )
