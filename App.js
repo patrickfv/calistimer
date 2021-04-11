@@ -6,8 +6,10 @@ import AppLoading from 'expo-app-loading'
 import {
    EMONScreen,
    HomeScreen,
+   IsometriaScreen,
    EMOM_SCREEN_NAME,
-   HOME_SCREEN_NAME } from './app/screens'
+   HOME_SCREEN_NAME,
+   ISOMETRIA_SCREEN_NAME, } from './app/screens'
 import { initLoadFonts } from './app/styles'
 
 const Stack = createStackNavigator()
@@ -19,7 +21,7 @@ export default function App() {
     <AppLoading
       startAsync={initLoadFonts}
       onFinish={() => setLoaded(true)}
-      onError={() => {}} />
+      onError={() => {}} /> 
   )
 
   return (
@@ -27,6 +29,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home" headerMode="none">
           <Stack.Screen name={HOME_SCREEN_NAME} component={HomeScreen} />
           <Stack.Screen name={EMOM_SCREEN_NAME} component={EMONScreen} />
+          <Stack.Screen name={ISOMETRIA_SCREEN_NAME} component={IsometriaScreen} />
         </Stack.Navigator>
     </NavigationContainer>
   )
