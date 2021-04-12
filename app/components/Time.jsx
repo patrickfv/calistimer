@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, } from 'react'
 import { View, Text, StyleSheet, } from 'react-native'
 
 function format(time) {
@@ -15,8 +15,10 @@ function format(time) {
     }
 }
 
-export default function Time({ time, color='white', size=12, aling='center' }) {
+export default function Time({ time, color='white', size=12, aling='center', justSeconds=false, }) {
     const { minutes, seconds, } = format(time)
+
+    const display = justSeconds ? <Fragment>{ seconds }</Fragment> : <Fragment>{ minutes }:{ seconds }</Fragment> 
 
     return (
         <View style={styles.container}>
@@ -24,7 +26,9 @@ export default function Time({ time, color='white', size=12, aling='center' }) {
                 color,
                 fontSize: size,
                 textAlign: aling
-            }}>{ minutes }:{ seconds }</Text>
+            }}>
+                { display }
+            </Text>
         </View>
     )
 }
