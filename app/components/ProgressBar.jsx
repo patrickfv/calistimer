@@ -6,7 +6,7 @@ export default function ProgressBar({ percentage, height=3, color='white', style
     const [animatedWidth, _] = useState(new Animated.Value(0))
     const width = animatedWidth.interpolate({
         inputRange: [0, 100],
-        outputRange: ['0%', '100%'],
+        outputRange: ['100%', '0%'],
         extrapolate: 'clamp',
     })
 
