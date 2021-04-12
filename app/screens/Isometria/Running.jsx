@@ -39,7 +39,6 @@ export default function Running({ time=60, alert=0, run=false, onClick=()=>{}, }
 
     useInterval(() => {
         action()
-        console.log(count, count / 100)
     }, 1000)
 
     useEffect(() => {
