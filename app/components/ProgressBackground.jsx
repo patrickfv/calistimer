@@ -25,8 +25,8 @@ export default function ProgressBackground({ children, percentage, }) {
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, }}>
-                <Animated.View style={{ height: height2, backgroundColor: '#E40039', }} />
-                <Animated.View style={{ height: height1, backgroundColor: '#2A0E12', }} />
+                <Animated.View style={{ height: height1, backgroundColor: '#E40039', }} />
+                <Animated.View style={{ height: height2, backgroundColor: '#2A0E12', }} />
             </View>
             <View style={styles.children}>
                 { children }
