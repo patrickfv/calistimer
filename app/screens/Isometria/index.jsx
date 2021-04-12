@@ -9,6 +9,7 @@ import { Dimensions,
 
 import { colors, fonts, } from '../../styles'
 import { RadioGroup, StaticButton, } from '../../components'
+import Running from './Running'
 
 const { width, height, } = Dimensions.get('window')
 
@@ -18,17 +19,14 @@ const INITIAL_STATE = {
     alert: 0,
     countdown: 0,
     playing: false,
-    time: 60,
+    time: 20,
 }
 
 export default function IsometriaScreen() {
-    const [seconds, setSeconds] = useState('1')
+    const [seconds, setSeconds] = useState('20')
     const [state, setState] = useState(INITIAL_STATE)
 
-    const optionsAlert = {
-        'Livre': 0,
-        'Bater Tempo': 1,
-    }
+    const optionsObjectives = ['Livre', 'Bater Tempo']
 
     const onChangeAlert = selected => {
         setState({
@@ -44,13 +42,15 @@ export default function IsometriaScreen() {
     }
     const onChangeText = text => setSeconds(text)
     const onBlur = () => {
-        if(!seconds) setSeconds('1')
+        if(!seconds) setSeconds('20')
         setSeconds((parseInt(seconds) || parseInt(1)).toString())
         setState({
             ...state,
-            time: parseInt(seconds) * 60,  
+            time: parseInt(seconds),
         })
     }
+
+    if(state.playing) return <Running alert={optionsObjectives[Object.keys(optionsObjectives)[state.alert]]} time={state.time} {...{ onClick }}/>
 
     return (
         <View style={styles.container}>
@@ -61,7 +61,7 @@ export default function IsometriaScreen() {
                 <View style={styles.content}>
                     <View style={styles.panel}>
                         <Text style={[styles.text, { fontSize: 18 }]}>Obejetivo:</Text>
-                        <RadioGroup items={Object.keys(optionsAlert)} onChange={onChangeAlert} selectedDefault={INITIAL_STATE.alert} />
+                        <RadioGroup items={optionsObjectives} onChange={onChangeAlert} selectedDefault={INITIAL_STATE.alert} />
                     </View>
                     <View style={[
                         styles.panel,
