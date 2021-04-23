@@ -2,7 +2,7 @@ import React, { useState, useEffect, } from 'react'
 import { View, StyleSheet, Text, Dimensions, } from 'react-native'
 import { Audio, } from 'expo-av'
 
-import { ProgressBackground, Time, StaticButton, } from '../../components'
+import { ProgressBackground, Time, PlayStopButton, } from '../../components'
 import { useInterval, } from '../../hooks'
 
 const { width, } = Dimensions.get('window')
@@ -42,7 +42,7 @@ export default function Running({ time=60, alert=0, run=false, onClick=()=>{}, }
     }, 1000)
 
     useEffect(() => {
-        countAlert && count % alert === 0
+        countAlert && count % alert === 0 || count <= 5
             ? playSound()
             : undefined
     }, [count])
@@ -71,7 +71,7 @@ export default function Running({ time=60, alert=0, run=false, onClick=()=>{}, }
                 </View>
                 <View style={{ flexGrow: 1, justifyContent: 'space-evenly' }}>
                     <Text style={{ fontSize: 70, color: 'white', textAlign: 'center', }}>{ countTimeout }</Text>
-                    <StaticButton {...{ onClick }} type="stop" style={{ alignSelf: 'flex-end', }} />
+                    <PlayStopButton {...{ onClick }} type="stop" style={{ alignSelf: 'flex-end', }} />
                 </View>
             </View>
         </ProgressBackground>

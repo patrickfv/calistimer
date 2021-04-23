@@ -8,7 +8,7 @@ import { Dimensions,
     KeyboardAvoidingView, } from 'react-native'
 
 import { colors, fonts, } from '../../styles'
-import { RadioGroup, StaticButton, } from '../../components'
+import { PlayStopButton, RadioGroup, } from '../../components'
 import Running from './Running'
 
 const { width, height, } = Dimensions.get('window')
@@ -73,7 +73,7 @@ export default function IsometriaScreen() {
                     </View>
                     <View style={styles.panel}>
                         <View>
-                            <StaticButton size={60} {...{ onClick, }} />
+                            <PlayStopButton size={60} {...{ onClick, }} />
                         </View>
                     </View>
                 </View>

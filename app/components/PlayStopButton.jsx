@@ -18,7 +18,7 @@ function Stop() {
     )
 }
 
-export default function StaticButton({ size=50, onClick=()=>{}, type='play', style }) {
+export default function PlayStopButton({ size=50, onClick=()=>{}, type='play', style }) {
 
     const onPress = () => {
         onClick()
