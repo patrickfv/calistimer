@@ -28,14 +28,14 @@ export default function Running({ time=60, alert=0, run=false, onClick=()=>{}, }
     }, [sound])
     
     const action = () => {
-            if(running) {
-                if(countTimeout) setCountTimeout(countTimeout - 1)
-                if(count > 0) setCount(count - 1)
-            } else {
-                if(countTimeout) setCountTimeout(countTimeout - 1)
-                playSound()
-            }
+        if(running) {
+            if(countTimeout) setCountTimeout(countTimeout - 1)
+            if(count > 0) setCount(count - 1)
+        } else {
+            if(countTimeout) setCountTimeout(countTimeout - 1)
+            playSound()
         }
+    }
 
     useInterval(() => {
         action()
