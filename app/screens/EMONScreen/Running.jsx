@@ -1,6 +1,7 @@
 import React, { useState, useEffect, } from 'react'
 import { View, StyleSheet, Text, Dimensions, } from 'react-native'
 import { Audio, } from 'expo-av'
+import { useKeepAwake, } from 'expo-keep-awake'
 
 import { ProgressBackground, Time, ProgressBar, PlayStopButton, } from '../../components'
 import { useInterval, } from '../../hooks'
@@ -14,6 +15,7 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     const [countAlert, setCountAlert] = useState(false)
     const [countTimeout, setCountTimeout] = useState(5)
     const TIMEOUT = 5000
+    useKeepAwake()
 
     const playSound = async () => { 
         const { sound, } = await Audio.Sound.createAsync(require('../../assets/alert.wav'))

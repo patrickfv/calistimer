@@ -4,6 +4,7 @@ import { Audio, } from 'expo-av'
 
 import { ProgressBackground, Time, PlayStopButton, BackButton, RestartButton, } from '../../components'
 import { useInterval, } from '../../hooks'
+import { useKeepAwake } from 'expo-keep-awake'
 
 const { width, } = Dimensions.get('screen')
 
@@ -13,6 +14,7 @@ export default function Running({ time=60, run=false, goal=true, onClick=()=>{},
     const [running, setRunning] = useState(run)
     const [countTimeout, setCountTimeout] = useState(5)
     const TIMEOUT = 5000
+    useKeepAwake()
 
     const backClick = () => onClick()
     const playClick = () => setRunning(!running)
