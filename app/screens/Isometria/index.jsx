@@ -16,8 +16,7 @@ const { width, height, } = Dimensions.get('window')
 export const ISOMETRIA_SCREEN_NAME = 'ISOMETRIA_SCREEN'
 
 const INITIAL_STATE = {
-    alert: 0,
-    countdown: 0,
+    objective: 1,
     playing: false,
     time: 20,
 }
@@ -28,10 +27,10 @@ export default function IsometriaScreen() {
 
     const optionsObjectives = ['Livre', 'Bater Tempo']
 
-    const onChangeAlert = selected => {
+    const onChangeObjectives = selected => {
         setState({
             ...state,
-            alert: selected.id,
+            objective: selected.id,
         })
     }
     const onClick = () => {
@@ -50,7 +49,7 @@ export default function IsometriaScreen() {
         })
     }
 
-    if(state.playing) return <Running alert={optionsObjectives[Object.keys(optionsObjectives)[state.alert]]} time={state.time} {...{ onClick }}/>
+    if(state.playing) return <Running alert={optionsObjectives[Object.keys(optionsObjectives)[state.objective]]} time={state.objective ? state.time : 0} {...{ onClick }}/>
 
     return (
         <View style={styles.container}>
@@ -61,15 +60,23 @@ export default function IsometriaScreen() {
                 <View style={styles.content}>
                     <View style={styles.panel}>
                         <Text style={[styles.text, { fontSize: 18 }]}>Obejetivo:</Text>
-                        <RadioGroup items={optionsObjectives} onChange={onChangeAlert} selectedDefault={INITIAL_STATE.alert} />
+                        <RadioGroup items={optionsObjectives} onChange={onChangeObjectives} selectedDefault={INITIAL_STATE.objective} />
                     </View>
                     <View style={[
                         styles.panel,
                         { flex: 1, },
                     ]}>
-                        <Text style={styles.text}>QUANTOS SEGUNDOS</Text>
-                        <TextInput style={styles.count} keyboardType="number-pad" textContentType="telephoneNumber" onFocus={({ target }) => {}} value={seconds} {...{ onChangeText, onBlur, }} />
-                        <Text style={styles.text}>SEGUNDOS</Text>
+                        {
+                            state.objective 
+                            ? (
+                                <React.Fragment>
+                                    <Text style={styles.text}>QUANTOS SEGUNDOS</Text>
+                                    <TextInput style={styles.count} keyboardType="number-pad" textContentType="telephoneNumber" onFocus={({ target }) => {}} value={seconds} {...{ onChangeText, onBlur, }} />
+                                    <Text style={styles.text}>SEGUNDOS</Text>
+                                </React.Fragment>
+                            )
+                            : null
+                        }
                     </View>
                     <View style={styles.panel}>
                         <View>
