@@ -8,10 +8,12 @@ import {
    HomeScreen,
    IsometriaScreen,
    AboutScreen,
+   AMRAPScreen,
    EMOM_SCREEN_NAME,
    HOME_SCREEN_NAME,
    ISOMETRIA_SCREEN_NAME,
-  ABOUT_SCREEN_NAME, } from './app/screens'
+   ABOUT_SCREEN_NAME,
+   AMRAP_SCREEN_NAME, } from './app/screens'
 import { initLoadFonts } from './app/styles'
 
 const Stack = createStackNavigator()
@@ -33,6 +35,7 @@ export default function App() {
           <Stack.Screen name={ABOUT_SCREEN_NAME} component={AboutScreen} />
           <Stack.Screen name={EMOM_SCREEN_NAME} component={EMONScreen} />
           <Stack.Screen name={ISOMETRIA_SCREEN_NAME} component={IsometriaScreen} />
+          <Stack.Screen name={AMRAP_SCREEN_NAME} component={AMRAPScreen} />
         </Stack.Navigator>
     </NavigationContainer>
   )

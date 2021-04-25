@@ -7,6 +7,7 @@ import { TextButton } from '../components'
 import { EMOM_SCREEN_NAME } from './EMONScreen'
 import { ISOMETRIA_SCREEN_NAME } from  './Isometria'
 import { ABOUT_SCREEN_NAME } from './AboutScreen'
+import { AMRAP_SCREEN_NAME } from './AMRAPScreen'
 
 export const HOME_SCREEN_NAME = 'HOME_SCREEN'
 const { width } = Dimensions.get('window')
@@ -15,7 +16,7 @@ export default function HomeScreen() {
     const navigation = useNavigation()
     const goAbout = () => navigation.navigate(ABOUT_SCREEN_NAME)
     const goEMON = () => navigation.navigate(EMOM_SCREEN_NAME)
-    const goAMRAP = () => {}
+    const goAMRAP = () => navigation.navigate(AMRAP_SCREEN_NAME)
     const goIsometria = () => navigation.navigate(ISOMETRIA_SCREEN_NAME)
 
     return (
