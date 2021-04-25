@@ -2,27 +2,27 @@ import React from 'react'
 import { TouchableWithoutFeedback, } from 'react-native-gesture-handler'
 import { Image, } from 'react-native'
 
-function Play() {
+function Play({ size, }) {
     return (
         <Image style={{
-            width: 70,
-            height: 70,
+            width: size,
+            height: size,
             resizeMode: 'contain' 
         }} source={require('../assets/play.png')} />
     )
 }
 
-function Stop() {
+function Stop({ size, }) {
     return (
         <Image style={{
-            width: 70,
-            height: 70,
+            width: size,
+            height: size,
             resizeMode: 'contain' 
         }} source={require('../assets/stop.png')} />
     )
 }
 
-export default function PlayStopButton({ size=50, onClick=()=>{}, type='play', style }) {
+export default function PlayStopButton({ size=70, onClick=()=>{}, type='play', }) {
 
     const onPress = () => {
         onClick()
@@ -31,8 +31,8 @@ export default function PlayStopButton({ size=50, onClick=()=>{}, type='play', s
     return (
         <TouchableWithoutFeedback {...{ onPress }}>
             { type === 'play'
-                ? <Play />
-                : <Stop />
+                ? <Play {...{ size, }}/>
+                : <Stop {...{ size, }}/>
             }
         </TouchableWithoutFeedback>
     )
