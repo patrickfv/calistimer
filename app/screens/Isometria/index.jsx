@@ -49,7 +49,7 @@ export default function IsometriaScreen() {
         })
     }
 
-    if(state.playing) return <Running alert={optionsObjectives[Object.keys(optionsObjectives)[state.objective]]} time={state.objective ? state.time : 0} {...{ onClick }}/>
+    if(state.playing) return <Running alert={optionsObjectives[Object.keys(optionsObjectives)[state.objective]]} time={state.objective ? state.time : 0} goal={state.objective === 0} {...{ onClick, }}/>
 
     return (
         <View style={styles.container}>

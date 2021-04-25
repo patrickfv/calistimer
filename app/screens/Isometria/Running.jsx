@@ -8,7 +8,7 @@ import { useKeepAwake } from 'expo-keep-awake'
 
 const { width, } = Dimensions.get('screen')
 
-export default function Running({ time=60, run=false, goal=true, onClick=()=>{}, }) {
+export default function Running({ time=60, run=false, goal=false, onClick=()=>{}, }) {
     const [sound, setSound] = useState()
     const [count, setCount] = useState(time)
     const [running, setRunning] = useState(run)
@@ -97,7 +97,7 @@ export default function Running({ time=60, run=false, goal=true, onClick=()=>{},
                             ? null
                             : (
                                 <React.Fragment>
-                                    <Time time={count} justSeconds={true} />)
+                                    <Time time={count} justSeconds={true} />
                                     <Text style={{ color: 'white', textAlign: 'center', fontSize: 16, }}>restantes</Text>
                                 </React.Fragment>
                             )
