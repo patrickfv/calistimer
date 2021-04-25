@@ -7,9 +7,11 @@ import {
    EMONScreen,
    HomeScreen,
    IsometriaScreen,
+   AboutScreen,
    EMOM_SCREEN_NAME,
    HOME_SCREEN_NAME,
-   ISOMETRIA_SCREEN_NAME, } from './app/screens'
+   ISOMETRIA_SCREEN_NAME,
+  ABOUT_SCREEN_NAME, } from './app/screens'
 import { initLoadFonts } from './app/styles'
 
 const Stack = createStackNavigator()
@@ -26,8 +28,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Navigator initialRouteName={HOME_SCREEN_NAME} headerMode="none">
           <Stack.Screen name={HOME_SCREEN_NAME} component={HomeScreen} />
+          <Stack.Screen name={ABOUT_SCREEN_NAME} component={AboutScreen} />
           <Stack.Screen name={EMOM_SCREEN_NAME} component={EMONScreen} />
           <Stack.Screen name={ISOMETRIA_SCREEN_NAME} component={IsometriaScreen} />
         </Stack.Navigator>

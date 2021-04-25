@@ -6,12 +6,14 @@ import { colors, fonts } from '../styles'
 import { TextButton } from '../components'
 import { EMOM_SCREEN_NAME } from './EMONScreen'
 import { ISOMETRIA_SCREEN_NAME } from  './Isometria'
+import { ABOUT_SCREEN_NAME } from './AboutScreen'
 
 export const HOME_SCREEN_NAME = 'HOME_SCREEN'
 const { width } = Dimensions.get('window')
 
 export default function HomeScreen() {
     const navigation = useNavigation()
+    const goAbout = () => navigation.navigate(ABOUT_SCREEN_NAME)
     const goEMON = () => navigation.navigate(EMOM_SCREEN_NAME)
     const goAMRAP = () => {}
     const goIsometria = () => navigation.navigate(ISOMETRIA_SCREEN_NAME)
@@ -22,6 +24,7 @@ export default function HomeScreen() {
                 <Text style={styles.title}>CalisTimer</Text>
             </View>
             <View style={styles.buttons}>
+                <TextButton title="Sobre" style={styles.bt} onPress={goAbout}/>
                 <TextButton title="EMOM" style={styles.bt} onPress={goEMON}/>
                 <TextButton title="AMRAP" style={styles.bt} onPress={goAMRAP}/>
                 <TextButton title="Isometria" style={styles.bt} onPress={goIsometria}/>
