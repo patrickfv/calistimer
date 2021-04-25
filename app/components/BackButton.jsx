@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableWithoutFeedback, } from 'react-native'
+import { Image, TouchableWithoutFeedback, } from 'react-native'
 
 export default function BackButton({ onClick=()=>{}, size=50, style, }) {
     const onPress = () => onClick()
@@ -15,7 +15,11 @@ export default function BackButton({ onClick=()=>{}, size=50, style, }) {
         }, 
         style
         ]}>
-        <Text>Voltar</Text>
+        <Image style={{
+            width: 70,
+            height: 70,
+            resizeMode: 'contain' 
+        }} source={require('../assets/back-arrow.png')} />
     </TouchableWithoutFeedback>
     )
 }
