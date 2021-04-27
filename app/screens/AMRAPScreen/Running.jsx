@@ -15,7 +15,7 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     const [running, setRunning] = useState(run)
     const [countAlert, _] = useState(false)
     const [countTimeout, setCountTimeout] = useState(5)
-    const [repetitions, setRepetations] = useState(1)
+    const [repetitions, setRepetations] = useState(0)
     const [media, setMedia] = useState(repetitions > 0 ? count / repetitions : 0)
     const [estimated, setEstimated] = useState(media > 0 ? Math.floor(parseInt(time) * 60 / media) : 0)
     useKeepAwake()
@@ -36,6 +36,7 @@ export default function Running({ countdown=false, time=60, alert=0, run=false, 
     const restartClick = () => {
         setCount(countdown ? 0 : time)
         setCountTimeout(5)
+        setRepetations(0)
     }
 
     useEffect(() => {
