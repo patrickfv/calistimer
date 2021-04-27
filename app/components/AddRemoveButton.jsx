@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableWithoutFeedback, } from 'react-native-gesture-handler'
+import { TouchableOpacity, } from 'react-native-gesture-handler'
 import { Image, } from 'react-native'
 
 function Add({ size, }) {
@@ -29,12 +29,12 @@ export default function PlayStopButton({ size=70, onClick=()=>{}, type='add', })
     }
     
     return (
-        <TouchableWithoutFeedback {...{ onPress }}>
+        <TouchableOpacity {...{ onPress }}>
             { type === 'add'
                 ? <Add {...{ size, }}/>
                 : <Remove {...{ size, }}/>
             }
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
     )
 }
 
