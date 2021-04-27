@@ -13,7 +13,6 @@ export default function Running({ time=60, run=false, goal=false, onClick=()=>{}
     const [count, setCount] = useState(time)
     const [running, setRunning] = useState(run)
     const [countTimeout, setCountTimeout] = useState(5)
-    const TIMEOUT = 5000
     useKeepAwake()
 
     const backClick = () => onClick()
@@ -70,14 +69,6 @@ export default function Running({ time=60, run=false, goal=false, onClick=()=>{}
                 : undefined
         }
     }, [count])
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setRunning(true)
-            return clearTimeout(timeout)
-        }, TIMEOUT)
-        return () => clearTimeout(timeout)
-    }, [])
     
     return (
         <ProgressBackground percentage={goal ? 100 : parseInt(count / time * 100)}>
