@@ -1,22 +1,26 @@
-# Reanimated v2 (release candidate) example
+# CALISTIMER
 
-<p>
-  <!-- iOS -->
-  <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  <!-- Android -->
-  <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  <!-- Web -->
-</p>
+Aplicativo construido durante as aulas do curso de ReactJS/React-Native do DevPleno, o devReactJS nos módulos de react-native.
 
-Experiment with Reanimated 2 (rc) in SDK 40.
+## Telas
 
-## 🚀 How to use
+### about
 
-> `npx create-react-native-app my-app -t with-reanimated2`
+<img src="./images/about.jpg" alt="about_screen" style="width:200px;">
 
-- Run `yarn` or `npm install`
-- Run [`expo start`](https://docs.expo.io/versions/latest/workflow/expo-cli/), try it out.
+### home
 
-## 📝 Notes
+<img src="./images/home.jpg" alt="about_screen" style="width:200px;">
 
-- [react-native-reanimated v2 docs](https://docs.swmansion.com/react-native-reanimated/)
+### emom
+<img src="./images/emom.jpg" alt="about_screen" style="width:200px;">
+
+<img src="./images/emom_running.jpg" alt="about_screen" style="width:200px;">
+
+### amrap
+
+<img src="./images/amrap_running.jpg" alt="about_screen" style="width:200px;">
+
+### isometria
+
+<img src="./images/isometria.jpg" alt="about_screen" style="width:200px;">
