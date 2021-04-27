@@ -15,13 +15,13 @@ function format(time) {
     }
 }
 
-export default function Time({ time, color='white', size=12, aling='center', justSeconds=false, }) {
+export default function Time({ time, color='white', size=12, aling='center', justSeconds=false, containerStyle={}, }) {
     const { minutes, seconds, } = format(time)
 
     const display = justSeconds ? <Fragment>{ seconds }</Fragment> : <Fragment>{ minutes }:{ seconds }</Fragment> 
 
     return (
-        <View style={styles.container}>
+        <View style={containerStyle}>
             <Text style={{
                 color,
                 fontSize: size,
@@ -32,9 +32,3 @@ export default function Time({ time, color='white', size=12, aling='center', jus
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-})
